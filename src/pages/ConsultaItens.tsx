@@ -19,10 +19,10 @@ const ConsultaItens = () => {
   const [armazens, setArmazens] = useState<any[]>([]);
   const [filters, setFilters] = useState({
     search: "",
-    tiporecursofisico: "",
-    statusitem: "",
-    qualidade: "",
-    armazem: "",
+    tiporecursofisico: "all",
+    statusitem: "all",
+    qualidade: "all",
+    armazem: "all",
   });
 
   useEffect(() => {
@@ -65,16 +65,16 @@ const ConsultaItens = () => {
         armazem:armazem(idarmazem, endereco)
       `);
 
-      if (filters.tiporecursofisico) {
+      if (filters.tiporecursofisico && filters.tiporecursofisico !== "all") {
         query = query.eq("tiporecursofisico", filters.tiporecursofisico);
       }
-      if (filters.statusitem) {
+      if (filters.statusitem && filters.statusitem !== "all") {
         query = query.eq("statusitem", filters.statusitem);
       }
-      if (filters.qualidade) {
+      if (filters.qualidade && filters.qualidade !== "all") {
         query = query.eq("qualidade", filters.qualidade);
       }
-      if (filters.armazem) {
+      if (filters.armazem && filters.armazem !== "all") {
         query = query.eq("armazem", filters.armazem);
       }
 
@@ -147,7 +147,7 @@ const ConsultaItens = () => {
                       <SelectValue placeholder="Todos" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">Todos</SelectItem>
+                      <SelectItem value="all">Todos</SelectItem>
                       {tiposRecurso.map((tipo) => (
                         <SelectItem key={tipo.idtiporecurso} value={tipo.idtiporecurso}>
                           {tipo.nome}
@@ -164,7 +164,7 @@ const ConsultaItens = () => {
                       <SelectValue placeholder="Todos" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">Todos</SelectItem>
+                      <SelectItem value="all">Todos</SelectItem>
                       <SelectItem value="Disponível">Disponível</SelectItem>
                       <SelectItem value="Em Uso">Em Uso</SelectItem>
                       <SelectItem value="Manutenção">Manutenção</SelectItem>
@@ -179,7 +179,7 @@ const ConsultaItens = () => {
                       <SelectValue placeholder="Todas" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">Todas</SelectItem>
+                      <SelectItem value="all">Todas</SelectItem>
                       <SelectItem value="Excelente">Excelente</SelectItem>
                       <SelectItem value="Boa">Boa</SelectItem>
                       <SelectItem value="Regular">Regular</SelectItem>
@@ -195,7 +195,7 @@ const ConsultaItens = () => {
                       <SelectValue placeholder="Todos" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">Todos</SelectItem>
+                      <SelectItem value="all">Todos</SelectItem>
                       {armazens.map((arm) => (
                         <SelectItem key={arm.idarmazem} value={arm.idarmazem}>
                           {arm.idarmazem} - {arm.endereco}
